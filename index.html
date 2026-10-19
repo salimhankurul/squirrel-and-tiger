@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Squirrel 🐿️ & Tiger 🐯</title>
+  <meta name="description" content="Counting every second until Squirrel and Tiger meet 💕" />
+  <meta property="og:title" content="Time until Squirrel 🐿️ & Tiger 🐯 meet 💕" />
+  <meta property="og:description" content="Vienna 🐿️ ♥ 🐯 Istanbul — counting every second until 22 October 2026." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#ffd6e4" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #ff6f9c;
+      --pink-deep: #e84a7f;
+      --pink-soft: #ffd6e4;
+      --peach: #ffe3d3;
+      --lavender: #e9ddff;
+      --cream: #fffaf6;
+      --text: #6b3a4f;
+      --text-soft: #a0697f;
+      --shadow: 0 10px 30px rgba(232, 74, 127, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+      color: var(--text);
+      background: linear-gradient(160deg, var(--pink-soft) 0%, var(--peach) 50%, var(--lavender) 100%);
+      background-attachment: fixed;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Floating background hearts */
+    .bg-hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .bg-heart {
+      position: absolute;
+      bottom: -40px;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: max(28px, env(safe-area-inset-top)) 18px max(32px, env(safe-area-inset-bottom));
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: clamp(1.7rem, 6.5vw, 2.8rem);
+      line-height: 1.15;
+      color: var(--pink-deep);
+      text-shadow: 0 3px 0 #fff, 0 6px 16px rgba(232, 74, 127, 0.25);
+    }
+    h1 .small {
+      display: block;
+      font-size: 0.55em;
+      font-weight: 500;
+      color: var(--text-soft);
+      text-shadow: none;
+      margin-bottom: 4px;
+    }
+
+    /* Squirrel ♥ Tiger */
+    .couple {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .buddy { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 auto; }
+    .avatar {
+      width: clamp(78px, 22vw, 110px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 4px solid #fff;
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      font-size: clamp(2.6rem, 12vw, 3.8rem);
+      position: relative;
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+    .buddy.tiger .avatar { animation-delay: 1.2s; }
+    /* rosy cheeks */
+    .avatar::before, .avatar::after {
+      content: "";
+      position: absolute;
+      bottom: 22%;
+      width: 16%;
+      height: 9%;
+      border-radius: 50%;
+      background: rgba(255, 111, 156, 0.35);
+      filter: blur(1px);
+    }
+    .avatar::before { left: 12%; }
+    .avatar::after  { right: 12%; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-10px) rotate(3deg); }
+    }
+    .name { font-weight: 600; font-size: 1.15rem; color: var(--pink-deep); }
+    .city { font-size: 0.85rem; color: var(--text-soft); }
+
+    .path {
+      flex: 1;
+      position: relative;
+      height: 40px;
+      min-width: 60px;
+    }
+    .path::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      border-top: 3px dashed rgba(232, 74, 127, 0.4);
+    }
+    .path .heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: clamp(1.6rem, 7vw, 2.2rem);
+      transform: translate(-50%, -50%);
+      animation: beat 1.1s ease-in-out infinite;
+    }
+    @keyframes beat {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      15%      { transform: translate(-50%, -50%) scale(1.25); }
+      30%      { transform: translate(-50%, -50%) scale(1); }
+      45%      { transform: translate(-50%, -50%) scale(1.15); }
+    }
+    .distance {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 22px);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    /* Countdown */
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(8px, 2.5vw, 16px);
+    }
+    .unit {
+      background: rgba(255, 255, 255, 0.85);
+      border: 3px solid #fff;
+      border-radius: 24px;
+      padding: clamp(12px, 3.5vw, 22px) 4px clamp(10px, 3vw, 16px);
+      box-shadow: var(--shadow);
+    }
+    .num {
+      display: block;
+      font-weight: 700;
+      font-size: clamp(1.9rem, 9.5vw, 3.4rem);
+      line-height: 1;
+      color: var(--pink);
+      font-variant-numeric: tabular-nums;
+    }
+    .num.pop { animation: pop 0.35s ease-out; }
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+    .label {
+      display: block;
+      margin-top: 6px;
+      font-size: clamp(0.7rem, 3vw, 0.95rem);
+      font-weight: 500;
+      color: var(--text-soft);
+      text-transform: lowercase;
+    }
+
+    .when {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 14px 16px;
+      line-height: 1.5;
+      font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+    }
+    .when strong { color: var(--pink-deep); font-weight: 600; }
+    .when .alt { font-size: 0.85em; color: var(--text-soft); }
+
+    /* Live clocks */
+    .clocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .clock {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 12px 8px;
+    }
+    .clock .who { font-size: 0.85rem; color: var(--text-soft); }
+    .clock .time {
+      font-size: clamp(1.4rem, 6vw, 1.8rem);
+      font-weight: 600;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .message {
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      color: var(--pink-deep);
+      min-height: 2.6em;
+      display: grid;
+      place-items: center;
+      transition: opacity 0.6s ease;
+    }
+    .message.fade { opacity: 0; }
+
+    .hint { font-size: 0.75rem; color: var(--text-soft); opacity: 0.8; }
+
+    /* Together state */
+    .together {
+      display: none;
+      background: rgba(255, 255, 255, 0.85);
+      border: 3px solid #fff;
+      border-radius: 28px;
+      padding: 26px 18px;
+      box-shadow: var(--shadow);
+    }
+    .together .big { font-size: clamp(3rem, 16vw, 4.5rem); animation: bounce 2s ease-in-out infinite; }
+    .together h2 {
+      font-size: clamp(1.5rem, 6.5vw, 2.2rem);
+      color: var(--pink-deep);
+      margin-top: 8px;
+    }
+    .together p { color: var(--text-soft); margin-top: 6px; }
+    body.met .together { display: block; }
+    body.met .countdown, body.met .message { display: none; }
+
+    /* Tap hearts */
+    .tap-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 5;
+      font-size: 1.6rem;
+      animation: tapFloat 1.2s ease-out forwards;
+    }
+    @keyframes tapFloat {
+      0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--dx)), calc(-50% - 120px)) scale(1.2); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .bg-hearts { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-hearts" aria-hidden="true"></div>
+
+  <main>
+    <h1>
+      <span class="small">Time until</span>
+      Squirrel &amp; Tiger meet
+    </h1>
+
+    <section class="couple" aria-label="Squirrel in Vienna and Tiger in Istanbul">
+      <div class="buddy squirrel">
+        <div class="avatar" aria-hidden="true">🐿️</div>
+        <div class="name">Squirrel</div>
+        <div class="city">Vienna 🇦🇹</div>
+      </div>
+      <div class="path" aria-hidden="true">
+        <span class="heart">💖</span>
+        <span class="distance">1,277 km apart</span>
+      </div>
+      <div class="buddy tiger">
+        <div class="avatar" aria-hidden="true">🐯</div>
+        <div class="name">Tiger</div>
+        <div class="city">Istanbul 🇹🇷</div>
+      </div>
+    </section>
+
+    <section class="countdown" aria-live="off">
+      <div class="unit"><span class="num" id="days">0</span><span class="label">days</span></div>
+      <div class="unit"><span class="num" id="hours">00</span><span class="label">hours</span></div>
+      <div class="unit"><span class="num" id="minutes">00</span><span class="label">minutes</span></div>
+      <div class="unit"><span class="num" id="seconds">00</span><span class="label">seconds</span></div>
+    </section>
+
+    <section class="together">
+      <div class="big" aria-hidden="true">🐿️💕🐯</div>
+      <h2>Together at last!</h2>
+      <p>Squirrel and Tiger are finally in the same place 🥰</p>
+    </section>
+
+    <p class="message" id="message">Every second brings us closer 💕</p>
+
+    <section class="when">
+      <strong>Thursday, 22 October 2026</strong><br />
+      17:00 in Vienna <span class="alt">· 18:00 in Istanbul</span>
+    </section>
+
+    <section class="clocks">
+      <div class="clock">
+        <div class="who">🐿️ Squirrel's time</div>
+        <div class="time" id="clock-vienna">--:--</div>
+      </div>
+      <div class="clock">
+        <div class="who">🐯 Tiger's time</div>
+        <div class="time" id="clock-istanbul">--:--</div>
+      </div>
+    </section>
+
+    <p class="hint">tap anywhere for hugs 🤗</p>
+  </main>
+
+  <script>
+    // 17:00 in Vienna (CEST, UTC+2) = 15:00 UTC = 18:00 in Istanbul
+    const MEET_TIME = new Date("2026-10-22T17:00:00+02:00").getTime();
+
+    const els = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds"),
+      vienna: document.getElementById("clock-vienna"),
+      istanbul: document.getElementById("clock-istanbul"),
+      message: document.getElementById("message"),
+    };
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    function setNum(el, value) {
+      if (el.textContent === value) return;
+      el.textContent = value;
+      el.classList.remove("pop");
+      void el.offsetWidth; // restart animation
+      el.classList.add("pop");
+    }
+
+    const clockFormat = (timeZone) =>
+      new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit" });
+    const viennaFormat = clockFormat("Europe/Vienna");
+    const istanbulFormat = clockFormat("Europe/Istanbul");
+
+    let celebrated = false;
+
+    function tick() {
+      const now = Date.now();
+      els.vienna.textContent = viennaFormat.format(now);
+      els.istanbul.textContent = istanbulFormat.format(now);
+
+      const diff = MEET_TIME - now;
+      if (diff <= 0) {
+        document.body.classList.add("met");
+        document.title = "Together! 🐿️💕🐯";
+        if (!celebrated) {
+          celebrated = true;
+          celebrate();
+        }
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const d = Math.floor(totalSeconds / 86400);
+      const h = Math.floor((totalSeconds % 86400) / 3600);
+      const m = Math.floor((totalSeconds % 3600) / 60);
+      const s = totalSeconds % 60;
+
+      setNum(els.days, String(d));
+      setNum(els.hours, pad(h));
+      setNum(els.minutes, pad(m));
+      setNum(els.seconds, pad(s));
+
+      document.title = `${d}d ${h}h ${m}m 💕 Squirrel & Tiger`;
+    }
+
+    // Rotating sweet messages
+    const messages = [
+      "Every second brings us closer 💕",
+      "Squirrel is saving up all the hugs 🐿️🤗",
+      "Tiger is warming up for the biggest cuddle 🐯💪",
+      "1,277 km is nothing for love ✈️",
+      "Soon: no more video calls, just us 🥰",
+      "Counting sleeps until cuddles 😴💤",
+      "Vienna 🤍 Istanbul",
+    ];
+    let msgIndex = 0;
+    setInterval(() => {
+      if (document.body.classList.contains("met")) return;
+      els.message.classList.add("fade");
+      setTimeout(() => {
+        msgIndex = (msgIndex + 1) % messages.length;
+        els.message.textContent = messages[msgIndex];
+        els.message.classList.remove("fade");
+      }, 600);
+    }, 5000);
+
+    // Floating background hearts
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const bg = document.querySelector(".bg-hearts");
+    const heartChars = ["💕", "💗", "💖", "🤍", "🩷", "✨"];
+    if (!reduceMotion) {
+      for (let i = 0; i < 18; i++) {
+        const span = document.createElement("span");
+        span.className = "bg-heart";
+        span.textContent = heartChars[i % heartChars.length];
+        span.style.left = Math.random() * 100 + "%";
+        span.style.fontSize = 14 + Math.random() * 18 + "px";
+        span.style.animationDuration = 9 + Math.random() * 10 + "s";
+        span.style.animationDelay = -Math.random() * 18 + "s";
+        bg.appendChild(span);
+      }
+    }
+
+    // Tap / click to spawn little hearts
+    function burst(x, y, count) {
+      if (reduceMotion) return;
+      for (let i = 0; i < count; i++) {
+        const span = document.createElement("span");
+        span.className = "tap-heart";
+        span.textContent = heartChars[Math.floor(Math.random() * 5)];
+        span.style.left = x + "px";
+        span.style.top = y + "px";
+        span.style.setProperty("--dx", (Math.random() * 120 - 60).toFixed(0) + "px");
+        span.style.animationDelay = (i * 0.06).toFixed(2) + "s";
+        document.body.appendChild(span);
+        span.addEventListener("animationend", () => span.remove());
+      }
+    }
+    document.addEventListener("pointerdown", (e) => burst(e.clientX, e.clientY, 5));
+
+    function celebrate() {
+      let rounds = 0;
+      const timer = setInterval(() => {
+        burst(Math.random() * window.innerWidth, window.innerHeight * (0.3 + Math.random() * 0.5), 8);
+        if (++rounds >= 12) clearInterval(timer);
+      }, 350);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
