@@ -213,8 +213,8 @@
     /* Live clocks */
     .clocks {
       display: grid;
-      grid-template-columns: minmax(0, 260px);
-      justify-content: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
     .clock {
       background: rgba(255, 255, 255, 0.6);
@@ -330,6 +330,10 @@
         <div class="who">🐿️ Squirrel's time</div>
         <div class="time" id="clock-vienna">--:--</div>
       </div>
+      <div class="clock">
+        <div class="who">🐯 Tiger's time</div>
+        <div class="time" id="clock-istanbul">--:--</div>
+      </div>
     </section>
 
     <p class="hint">tap anywhere for hugs 🤗</p>
@@ -345,6 +349,7 @@
       minutes: document.getElementById("minutes"),
       seconds: document.getElementById("seconds"),
       vienna: document.getElementById("clock-vienna"),
+      istanbul: document.getElementById("clock-istanbul"),
       message: document.getElementById("message"),
     };
 
@@ -358,17 +363,17 @@
       el.classList.add("pop");
     }
 
-    const viennaFormat = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/Vienna",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    const clockFormat = (timeZone) =>
+      new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit" });
+    const viennaFormat = clockFormat("Europe/Vienna");
+    const istanbulFormat = clockFormat("Europe/Istanbul");
 
     let celebrated = false;
 
     function tick() {
       const now = Date.now();
       els.vienna.textContent = viennaFormat.format(now);
+      els.istanbul.textContent = istanbulFormat.format(now);
 
       const diff = MEET_TIME - now;
       if (diff <= 0) {
