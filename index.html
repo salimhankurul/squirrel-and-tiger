@@ -209,13 +209,12 @@
       font-size: clamp(0.95rem, 3.8vw, 1.1rem);
     }
     .when strong { color: var(--pink-deep); font-weight: 600; }
-    .when .alt { font-size: 0.85em; color: var(--text-soft); }
 
     /* Live clocks */
     .clocks {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: minmax(0, 260px);
+      justify-content: center;
     }
     .clock {
       background: rgba(255, 255, 255, 0.6);
@@ -323,7 +322,7 @@
 
     <section class="when">
       <strong>Thursday, 22 October 2026</strong><br />
-      ✈️ Plane lands 16:55 in Vienna <span class="alt">· 17:55 in Istanbul</span>
+      ✈️ Plane lands 16:55 in Vienna
     </section>
 
     <section class="clocks">
@@ -331,17 +330,13 @@
         <div class="who">🐿️ Squirrel's time</div>
         <div class="time" id="clock-vienna">--:--</div>
       </div>
-      <div class="clock">
-        <div class="who">🐯 Tiger's time</div>
-        <div class="time" id="clock-istanbul">--:--</div>
-      </div>
     </section>
 
     <p class="hint">tap anywhere for hugs 🤗</p>
   </main>
 
   <script>
-    // Plane lands 16:55 in Vienna (CEST, UTC+2) = 14:55 UTC = 17:55 in Istanbul
+    // Plane lands 16:55 in Vienna (CEST, UTC+2)
     const MEET_TIME = new Date("2026-10-22T16:55:00+02:00").getTime();
 
     const els = {
@@ -350,7 +345,6 @@
       minutes: document.getElementById("minutes"),
       seconds: document.getElementById("seconds"),
       vienna: document.getElementById("clock-vienna"),
-      istanbul: document.getElementById("clock-istanbul"),
       message: document.getElementById("message"),
     };
 
@@ -364,17 +358,17 @@
       el.classList.add("pop");
     }
 
-    const clockFormat = (timeZone) =>
-      new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit" });
-    const viennaFormat = clockFormat("Europe/Vienna");
-    const istanbulFormat = clockFormat("Europe/Istanbul");
+    const viennaFormat = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/Vienna",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
     let celebrated = false;
 
     function tick() {
       const now = Date.now();
       els.vienna.textContent = viennaFormat.format(now);
-      els.istanbul.textContent = istanbulFormat.format(now);
 
       const diff = MEET_TIME - now;
       if (diff <= 0) {
