@@ -250,7 +250,13 @@
       padding: 26px 18px;
       box-shadow: var(--shadow);
     }
-    .together .big { font-size: clamp(3rem, 16vw, 4.5rem); animation: bounce 2s ease-in-out infinite; }
+    .together .big { font-size: clamp(3rem, 16vw, 4.5rem); animation: hop 2s ease-in-out infinite; }
+    /* the chipmunk glyph faces left, so mirror it to face Tiger */
+    .together .big .sq { display: inline-block; transform: scaleX(-1); }
+    @keyframes hop {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
     .together h2 {
       font-size: clamp(1.5rem, 6.5vw, 2.2rem);
       color: var(--pink-deep);
@@ -313,7 +319,7 @@
     </section>
 
     <section class="together">
-      <div class="big" aria-hidden="true">🐿️💕🐯</div>
+      <div class="big" aria-hidden="true"><span class="sq">🐿️</span>💕🐯</div>
       <h2>Together at last!</h2>
       <p>Squirrel and Tiger are finally in the same place 🥰</p>
     </section>
