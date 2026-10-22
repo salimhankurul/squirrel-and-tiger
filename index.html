@@ -88,6 +88,9 @@
     }
 
     /* Squirrel ♥ Tiger */
+    /* the chipmunk glyph is drawn facing left; mirror it to face Tiger.
+       Lives on an inner span so it survives the transform animations. */
+    .sq { display: inline-block; transform: scaleX(-1); }
     .couple {
       display: flex;
       align-items: center;
@@ -251,8 +254,6 @@
       box-shadow: var(--shadow);
     }
     .together .big { font-size: clamp(3rem, 16vw, 4.5rem); animation: hop 2s ease-in-out infinite; }
-    /* the chipmunk glyph faces left, so mirror it to face Tiger */
-    .together .big .sq { display: inline-block; transform: scaleX(-1); }
     @keyframes hop {
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-10px); }
@@ -296,7 +297,7 @@
 
     <section class="couple" aria-label="Squirrel in Vienna and Tiger in Istanbul">
       <div class="buddy squirrel">
-        <div class="avatar" aria-hidden="true">🐿️</div>
+        <div class="avatar" aria-hidden="true"><span class="sq">🐿️</span></div>
         <div class="name">Squirrel</div>
         <div class="city">Vienna 🇦🇹</div>
       </div>
